@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaWedStudio | Soluciones de Programación de Vanguardia</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#inicio" class="logo">
+                <img src="img/logo NovaWedStudio.png" alt="NovaWedStudio Logo">
+            </a>
+            <button class="menu-toggle" id="menu-toggle">
+                <i data-lucide="menu"></i>
+            </button>
+            <ul id="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#contacto" class="btn-nav">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="hero-content">
+                <h1>Codificamos el <span class="gradient-text">Futuro Digital</span></h1>
+                <p>En NovaWedStudio transformamos tus ideas en software de alto rendimiento. Expertos en desarrollo web, móvil y consultoría tecnológica.</p>
+                <div class="hero-btns">
+                    <a href="#servicios" class="btn-primary">Ver Servicios</a>
+                    <a href="#contacto" class="btn-secondary">Hablemos</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="code-box">
+                    <div class="code-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <pre><code><span class="keyword">function</span> <span class="func">createSolution</span>(idea) {
+  <span class="keyword">const</span> studio = <span class="string">"NovaWedStudio"</span>;
+  <span class="keyword">return</span> studio.<span class="func">develop</span>(idea);
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios" class="services">
+            <div class="section-title">
+                <h2>Nuestros Servicios</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i data-lucide="code-2"></i>
+                    <h3>Desarrollo Web</h3>
+                    <p>Sitios modernos, rápidos y optimizados para SEO que impulsan tu presencia online.</p>
+                </div>
+                <div class="service-card">
+                    <i data-lucide="smartphone"></i>
+                    <h3>Apps Móviles</h3>
+                    <p>Experiencias nativas e híbridas diseñadas para cautivar a tus usuarios en iOS y Android.</p>
+                </div>
+                <div class="service-card">
+                    <i data-lucide="database"></i>
+                    <h3>Sistemas a Medida</h3>
+                    <p>Software personalizado para optimizar los procesos internos de tu empresa.</p>
+                </div>
+                <div class="service-card">
+                    <i data-lucide="terminal"></i>
+                    <h3>Consultoría IT</h3>
+                    <p>Asesoramiento experto para navegar la transformación digital de tu negocio.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="proyectos" class="portfolio">
+            <div class="section-title">
+                <h2>Proyectos Destacados</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="portfolio-grid">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="E-Commerce Platform">
+                    <div class="project-overlay">
+                        <div class="project-info">
+                            <span>Web App</span>
+                            <h3>E-Commerce Avanzado</h3>
+                            <p>Plataforma escalable con pasarela de pagos integrada.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80" alt="Fintech App">
+                    <div class="project-overlay">
+                        <div class="project-info">
+                            <span>Mobile</span>
+                            <h3>Fintech Connect</h3>
+                            <p>Gestión financiera segura desde dispositivos móviles.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80" alt="Corporate CRM">
+                    <div class="project-overlay">
+                        <div class="project-info">
+                            <span>Software</span>
+                            <h3>Nova CRM</h3>
+                            <p>Sistema a medida para gestión de relaciones con clientes.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80" alt="IoT Dashboard">
+                    <div class="project-overlay">
+                        <div class="project-info">
+                            <span>IoT</span>
+                            <h3>Smart Factory</h3>
+                            <p>Monitorización en tiempo real de procesos industriales.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="nosotros" class="about">
+            <div class="about-container">
+                <div class="about-text">
+                    <h2>Pasión por la Ingeniería de Software</h2>
+                    <p>Somos un equipo de desarrolladores apasionados por la innovación. En NovaWedStudio, no solo escribimos código; construimos soluciones que resuelven problemas reales y escalan con tu éxito.</p>
+                    <ul class="features">
+                        <li><i data-lucide="check-circle"></i> Metodologías Ágiles</li>
+                        <li><i data-lucide="check-circle"></i> Calidad de Código Superior</li>
+                        <li><i data-lucide="check-circle"></i> Soporte Continuo</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact">
+            <div class="contact-card">
+                <h2>Inicia tu proyecto hoy</h2>
+                <p>¿Tienes una idea? Déjanos ayudarte a hacerla realidad.</p>
+                <form id="contact-form" action="https://formspree.io/f/TU_ID_AQUÍ" method="POST">
+                    <input type="text" name="nombre" placeholder="Tu Nombre" required>
+                    <input type="email" name="email" placeholder="Tu Email" required>
+                    <textarea name="mensaje" placeholder="Cuéntanos sobre tu proyecto" rows="4" required></textarea>
+                    <button type="submit" class="btn-submit">Enviar Mensaje</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">NovaWed<span>Studio</span></div>
+            <p>&copy; 2026 NovaWedStudio. Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="#"><i data-lucide="github"></i></a>
+                <a href="#"><i data-lucide="linkedin"></i></a>
+                <a href="#"><i data-lucide="twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Inicializar iconos
+        lucide.createIcons();
+    </script>
+</body>
+</html>
