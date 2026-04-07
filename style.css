@@ -375,6 +375,48 @@ pre { font-family: 'Fira Code', 'JetBrains Mono', monospace; font-size: 0.95rem;
     transform: translateY(0);
 }
 
+.portfolio-footer {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 2.5rem;
+    background: var(--glass-bg);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    backdrop-filter: blur(10px);
+}
+
+.portfolio-footer p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.portfolio-footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 700;
+    position: relative;
+}
+
+.portfolio-footer a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: var(--gradient);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.portfolio-footer a:hover::after {
+    transform: scaleX(1);
+}
+
 /* About Section - REDISEÑADO */
 .about {
     background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.03), transparent);
@@ -641,119 +683,24 @@ footer {
     .tech-visual { width: 350px; height: 350px; margin: 0 auto; }
 }
 
-/* Modal Galería */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(11, 14, 20, 0.95);
-    backdrop-filter: blur(15px);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal.active {
-    display: flex;
-}
-
-.modal-content {
-    position: relative;
-    max-width: 90%;
-    max-height: 85%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-}
-
-.modal-image-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#modal-img {
-    max-width: 100%;
-    max-height: 80vh;
-    border-radius: 12px;
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), 0 0 20px rgba(59, 130, 246, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.close-modal {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    color: white;
-    font-size: 3rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.3s;
-    z-index: 2100;
-}
-
-.close-modal:hover {
-    transform: scale(1.2);
-    color: var(--accent-color);
-}
-
-.prev-btn, .next-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
-    padding: 1rem;
-    cursor: pointer;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-    z-index: 2100;
-}
-
-.prev-btn:hover, .next-btn:hover {
-    background: var(--accent-color);
-    box-shadow: 0 0 15px var(--accent-glow);
-    transform: scale(1.1);
-}
-
-.prev-btn i, .next-btn i {
-    width: 32px;
-    height: 32px;
-}
-
-.modal-counter {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--text-secondary);
-    font-weight: 600;
-    font-size: 1.1rem;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 0.5rem 1.5rem;
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
 @media (max-width: 768px) {
-    .modal-content {
+    nav { padding: 1rem 1.5rem; }
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 100%;
+        background: rgba(11, 14, 20, 0.98);
+        backdrop-filter: blur(20px);
         flex-direction: column;
-        gap: 1rem;
+        justify-content: center;
+        transform: translateX(100%);
     }
-    .prev-btn, .next-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    .prev-btn { left: 0; }
-    .next-btn { right: 0; }
-    .close-modal { top: 20px; right: 20px; }
+    nav ul.active { transform: translateX(0); }
+    .menu-toggle { display: block; z-index: 1001; }
+    .hero-content h1 { font-size: 2.8rem; }
+    form { grid-template-columns: 1fr; }
+    input, textarea, .btn-submit { grid-column: span 1; }
+    .contact-card { padding: 3rem 1.5rem; }
 }
-

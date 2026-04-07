@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('NovaWedStudio Script Loaded');
-
     // Manejo del formulario de contacto
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
@@ -48,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    const revealElements = document.querySelectorAll('.service-card, .about-container, .contact-card');
+    const revealElements = document.querySelectorAll('.service-card, .about-container, .contact-card, .portfolio-footer');
     revealElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -93,79 +91,4 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-
-    // --- LÓGICA DE GALERÍA MODAL (MEJORADA) ---
-    const modal = document.getElementById('gallery-modal');
-    const modalImg = document.getElementById('modal-img');
-    const closeBtn = document.querySelector('.close-modal');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    const currentIdxText = document.getElementById('current-idx');
-    const totalIdxText = document.getElementById('total-idx');
-
-    let galleryImages = [];
-    let currentImageIndex = 0;
-
-    // Usar delegación de eventos o asegurar que el clic se capture bien
-    document.addEventListener('click', (e) => {
-        const card = e.target.closest('.project-card[data-gallery]');
-        if (card) {
-            console.log('Project card clicked!');
-            const galleryAttr = card.getAttribute('data-gallery');
-            if (galleryAttr) {
-                galleryImages = galleryAttr.split(',');
-                currentImageIndex = 0;
-                updateModalImage();
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-    });
-
-    function updateModalImage() {
-        if (galleryImages.length > 0) {
-            modalImg.src = galleryImages[currentImageIndex];
-            currentIdxText.textContent = currentImageIndex + 1;
-            totalIdxText.textContent = galleryImages.length;
-            console.log('Showing image:', galleryImages[currentImageIndex]);
-        }
-    }
-
-    const closeModal = () => {
-        if (modal) {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    };
-
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    if (modal) {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-    }
-
-    if (prevBtn) {
-        prevBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
-            updateModalImage();
-        });
-    }
-
-    if (nextBtn) {
-        nextBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
-            updateModalImage();
-        });
-    }
-
-    document.addEventListener('keydown', (e) => {
-        if (modal && modal.classList.contains('active')) {
-            if (e.key === 'ArrowLeft') prevBtn.click();
-            if (e.key === 'ArrowRight') nextBtn.click();
-            if (e.key === 'Escape') closeModal();
-        }
-    });
 });
