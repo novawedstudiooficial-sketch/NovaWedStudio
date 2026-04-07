@@ -87,14 +87,67 @@ document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
         });
 
-        // Cerrar menú al hacer clic en un enlace
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                const icon = menuToggle.querySelector('i');
-                icon.setAttribute('data-lucide', 'menu');
-                lucide.createIcons();
-            });
+    // Lógica de Galería Modal (Lightbox)
+    const modal = document.getElementById('gallery-modal');
+    const modalImg = document.getElementById('modal-img');
+    const closeBtn = document.querySelector('.close-modal');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const currentIdxText = document.getElementById('current-idx');
+    const totalIdxText = document.getElementById('total-idx');
+
+    let galleryImages = [];
+    let currentImageIndex = 0;
+
+    const projectCards = document.querySelectorAll('.project-card[data-gallery]');
+    projectCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const galleryAttr = card.getAttribute('data-gallery');
+            if (galleryAttr) {
+                galleryImages = galleryAttr.split(',');
+                currentImageIndex = 0;
+                updateModalImage();
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Bloquear scroll
+            }
         });
+    });
+
+    function updateModalImage() {
+        if (galleryImages.length > 0) {
+            modalImg.src = galleryImages[currentImageIndex];
+            currentIdxText.textContent = currentImageIndex + 1;
+            totalIdxText.textContent = galleryImages.length;
+        }
     }
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = ''; // Restaurar scroll
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+        updateModalImage();
+    });
+
+    nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+        updateModalImage();
+    });
+
+    // Soporte para teclas de flecha
+    document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('active')) return;
+        if (e.key === 'ArrowLeft') prevBtn.click();
+        if (e.key === 'ArrowRight') nextBtn.click();
+        if (e.key === 'Escape') closeModal();
+    });
 });
