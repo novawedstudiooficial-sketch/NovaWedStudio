@@ -77,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            // Cambiar icono entre menú y X (opcional, pero mejora UX)
             const icon = menuToggle.querySelector('i');
             if (navLinks.classList.contains('active')) {
                 icon.setAttribute('data-lucide', 'x');
@@ -86,6 +85,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             lucide.createIcons();
         });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                icon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+    }
 
     // Lógica de Galería Modal (Lightbox)
     const modal = document.getElementById('gallery-modal');
@@ -108,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentImageIndex = 0;
                 updateModalImage();
                 modal.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Bloquear scroll
+                document.body.style.overflow = 'hidden';
             }
         });
     });
@@ -123,27 +132,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const closeModal = () => {
         modal.classList.remove('active');
-        document.body.style.overflow = ''; // Restaurar scroll
+        document.body.style.overflow = '';
     };
 
-    closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-    });
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    }
 
-    prevBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
-        updateModalImage();
-    });
+    if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateModalImage();
+        });
+    }
 
-    nextBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
-        updateModalImage();
-    });
+    if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            updateModalImage();
+        });
+    }
 
-    // Soporte para teclas de flecha
     document.addEventListener('keydown', (e) => {
         if (!modal.classList.contains('active')) return;
         if (e.key === 'ArrowLeft') prevBtn.click();
