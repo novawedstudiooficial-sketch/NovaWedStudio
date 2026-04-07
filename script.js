@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('NovaWedStudio Script Loaded');
+
     // Manejo del formulario de contacto
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
@@ -36,10 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Animación de aparición al hacer scroll (Intersection Observer)
-    const observerOptions = {
-        threshold: 0.1
-    };
-
+    const observerOptions = { threshold: 0.1 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -49,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Aplicar animación a las tarjetas de servicio y secciones
     const revealElements = document.querySelectorAll('.service-card, .about-container, .contact-card');
     revealElements.forEach(el => {
         el.style.opacity = '0';
@@ -96,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Lógica de Galería Modal (Lightbox)
+    // --- LÓGICA DE GALERÍA MODAL (MEJORADA) ---
     const modal = document.getElementById('gallery-modal');
     const modalImg = document.getElementById('modal-img');
     const closeBtn = document.querySelector('.close-modal');
@@ -108,9 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let galleryImages = [];
     let currentImageIndex = 0;
 
-    const projectCards = document.querySelectorAll('.project-card[data-gallery]');
-    projectCards.forEach(card => {
-        card.addEventListener('click', () => {
+    // Usar delegación de eventos o asegurar que el clic se capture bien
+    document.addEventListener('click', (e) => {
+        const card = e.target.closest('.project-card[data-gallery]');
+        if (card) {
+            console.log('Project card clicked!');
             const galleryAttr = card.getAttribute('data-gallery');
             if (galleryAttr) {
                 galleryImages = galleryAttr.split(',');
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
-        });
+        }
     });
 
     function updateModalImage() {
@@ -127,12 +127,15 @@ document.addEventListener('DOMContentLoaded', () => {
             modalImg.src = galleryImages[currentImageIndex];
             currentIdxText.textContent = currentImageIndex + 1;
             totalIdxText.textContent = galleryImages.length;
+            console.log('Showing image:', galleryImages[currentImageIndex]);
         }
     }
 
     const closeModal = () => {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     };
 
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
@@ -159,9 +162,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.addEventListener('keydown', (e) => {
-        if (!modal.classList.contains('active')) return;
-        if (e.key === 'ArrowLeft') prevBtn.click();
-        if (e.key === 'ArrowRight') nextBtn.click();
-        if (e.key === 'Escape') closeModal();
+        if (modal && modal.classList.contains('active')) {
+            if (e.key === 'ArrowLeft') prevBtn.click();
+            if (e.key === 'ArrowRight') nextBtn.click();
+            if (e.key === 'Escape') closeModal();
+        }
     });
 });
