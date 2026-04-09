@@ -6,8 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
             category: 'Gastronomía Digital',
             description: 'Sistema interactivo con función de carrito y pedidos, optimizado para una experiencia fluida en cualquier dispositivo.',
             images: [
-                'img/menu virtual/foto 1 .png'
-                // Aquí añadirás más imágenes cuando las tengas, ej: 'img/menu virtual/foto 2.png'
+                'img/menu virtual/foto 1 .png',
+                'img/menu virtual/foto 1(formato celular).png',
+                'img/menu virtual/foto 2.png',
+                'img/menu virtual/foto 2(formato celular).png',
+                'img/menu virtual/foto 3.png'
             ]
         },
         'Mitriki': {
