@@ -5,34 +5,44 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Menú Virtual',
             category: 'Gastronomía Digital',
             description: 'Sistema interactivo con función de carrito y pedidos, optimizado para una experiencia fluida en cualquier dispositivo.',
-            images: [
-                'img/menu virtual/foto 1 .png',
-                'img/menu virtual/foto 1(formato celular).png',
-                'img/menu virtual/foto 2.png',
-                'img/menu virtual/foto 2(formato celular).png',
-                'img/menu virtual/foto 3.png'
-            ]
+            images: {
+                desktop: [
+                    'img/menu virtual/foto 1 .png',
+                    'img/menu virtual/foto 2.png',
+                    'img/menu virtual/foto 3.png'
+                ],
+                mobile: [
+                    'img/menu virtual/foto 1(formato celular).png',
+                    'img/menu virtual/foto 2(formato celular).png'
+                ]
+            }
         },
         'Mitriki': {
             title: 'Mitriki',
             category: 'Ecosistema Digital',
             description: 'Plataforma robusta basada en microservicios y entretenimiento interactivo de alto rendimiento.',
-            images: [
-                'img/mitriki/proyecto 2mitriki.png'
-                // Aquí añadirás las imágenes de la nueva carpeta, ej: 'img/mitriki/foto1.png'
-            ]
+            images: {
+                desktop: ['img/mitriki/proyecto 2mitriki.png'],
+                mobile: []
+            }
         },
         'Vortex App': {
             title: 'Vortex App',
             category: 'Logística',
             description: 'Optimización inteligente de rutas y gestión de flotas con IA aplicada.',
-            images: ['https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80']
+            images: {
+                desktop: ['https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80'],
+                mobile: []
+            }
         },
         'Nova CRM': {
             title: 'Nova CRM',
             category: 'SaaS',
             description: 'Gestión avanzada de relaciones con clientes diseñada para escalar negocios.',
-            images: ['https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80']
+            images: {
+                desktop: ['https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80'],
+                mobile: []
+            }
         }
     };
 
@@ -46,34 +56,63 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModal = document.querySelector('.close-modal');
     const prevBtn = document.querySelector('.modal-prev');
     const nextBtn = document.querySelector('.modal-next');
+    const deviceBtns = document.querySelectorAll('.device-btn');
 
-    let currentProjectImages = [];
+    let currentProjectData = null;
+    let currentDevice = 'desktop';
     let currentIndex = 0;
 
     // Función para abrir el modal
     function openProject(projectName) {
-        const project = projectsData[projectName];
-        if (!project) return;
+        currentProjectData = projectsData[projectName];
+        if (!currentProjectData) return;
 
-        currentProjectImages = project.images;
+        currentDevice = 'desktop'; // Reset a desktop al abrir
         currentIndex = 0;
 
-        updateModalContent(project);
+        updateDeviceSelectorVisibility();
+        updateModalContent();
         modal.style.display = 'block';
-        document.body.style.overflow = 'hidden'; // Bloquear scroll
+        document.body.style.overflow = 'hidden';
     }
 
-    function updateModalContent(project) {
-        modalImg.src = currentProjectImages[currentIndex];
-        modalTitle.textContent = project.title;
-        modalDesc.textContent = project.description;
+    function updateDeviceSelectorVisibility() {
+        const hasMobile = currentProjectData.images.mobile && currentProjectData.images.mobile.length > 0;
+        const selector = document.querySelector('.device-selector');
+        selector.style.display = hasMobile ? 'flex' : 'none';
+        
+        // Reset active state
+        deviceBtns.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.device === 'desktop');
+        });
+    }
+
+    function updateModalContent() {
+        const images = currentProjectData.images[currentDevice];
+        modalImg.src = images[currentIndex];
+        modalTitle.textContent = currentProjectData.title;
+        modalDesc.textContent = currentProjectData.description;
         modalCurrentIndex.textContent = currentIndex + 1;
-        modalTotalImages.textContent = currentProjectImages.length;
+        modalTotalImages.textContent = images.length;
 
-        // Ocultar botones si solo hay una imagen
-        prevBtn.style.display = currentProjectImages.length > 1 ? 'block' : 'none';
-        nextBtn.style.display = currentProjectImages.length > 1 ? 'block' : 'none';
+        // Estilo especial si es móvil (imagen más estrecha)
+        modalImg.style.maxHeight = currentDevice === 'mobile' ? '70vh' : '70vh';
+        modalImg.style.width = currentDevice === 'mobile' ? 'auto' : '100%';
+
+        prevBtn.style.display = images.length > 1 ? 'block' : 'none';
+        nextBtn.style.display = images.length > 1 ? 'block' : 'none';
     }
+
+    // Eventos de selección de dispositivo
+    deviceBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            deviceBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentDevice = btn.dataset.device;
+            currentIndex = 0;
+            updateModalContent();
+        });
+    });
 
     // Eventos de los proyectos
     document.querySelectorAll('.project-card').forEach(card => {
@@ -83,7 +122,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Eventos del Modal
+    // Navegación
+    prevBtn.addEventListener('click', () => {
+        const images = currentProjectData.images[currentDevice];
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateModalContent();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        const images = currentProjectData.images[currentDevice];
+        currentIndex = (currentIndex + 1) % images.length;
+        updateModalContent();
+    });
+
+    // Cerrar modal
     closeModal.addEventListener('click', () => {
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
@@ -94,18 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
-    });
-
-    prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + currentProjectImages.length) % currentProjectImages.length;
-        modalImg.src = currentProjectImages[currentIndex];
-        modalCurrentIndex.textContent = currentIndex + 1;
-    });
-
-    nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % currentProjectImages.length;
-        modalImg.src = currentProjectImages[currentIndex];
-        modalCurrentIndex.textContent = currentIndex + 1;
     });
 
     // Manejo del formulario de contacto
@@ -133,10 +173,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('¡Gracias por contactar con NovaWedStudio! Nos pondremos en contacto contigo pronto.');
                     form.reset();
                 } else {
-                    alert('Ups... Hubo un problema. Por favor, asegúrate de haber configurado tu ID de Formspree.');
+                    alert('Ups... Hubo un problema.');
                 }
             } catch (error) {
-                alert('Hubo un error al enviar el mensaje. Revisa tu conexión.');
+                alert('Hubo un error al enviar el mensaje.');
             } finally {
                 button.disabled = false;
                 button.textContent = 'Enviar Mensaje';
@@ -144,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Animación de aparición al hacer scroll
+    // Animación scroll e Intersection Observer
     const observerOptions = { threshold: 0.1 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -155,49 +195,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    const revealElements = document.querySelectorAll('.service-card, .about-container, .contact-card, .portfolio-footer');
-    revealElements.forEach(el => {
+    document.querySelectorAll('.service-card, .about-container, .contact-card, .portfolio-footer').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'all 0.8s ease-out';
         observer.observe(el);
     });
 
-    // Header scroll
+    // Header scroll logic
     const header = document.querySelector('header');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.padding = '0.5rem 2rem';
-            header.style.background = 'rgba(11, 14, 20, 0.95)';
-        } else {
-            header.style.padding = '1.5rem 2rem';
-            header.style.background = 'rgba(11, 14, 20, 0.8)';
-        }
+        header.style.padding = window.scrollY > 50 ? '0.5rem 2rem' : '1.5rem 2rem';
+        header.style.background = window.scrollY > 50 ? 'rgba(11, 14, 20, 0.95)' : 'rgba(11, 14, 20, 0.8)';
     });
 
-    // Menú móvil
+    // Mobile menu logic
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
-    
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             const icon = menuToggle.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.setAttribute('data-lucide', 'x');
-            } else {
-                icon.setAttribute('data-lucide', 'menu');
-            }
+            icon.setAttribute('data-lucide', navLinks.classList.contains('active') ? 'x' : 'menu');
             lucide.createIcons();
-        });
-
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                const icon = menuToggle.querySelector('i');
-                icon.setAttribute('data-lucide', 'menu');
-                lucide.createIcons();
-            });
         });
     }
 });
