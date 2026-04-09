@@ -62,8 +62,18 @@ nav {
 
 .logo img {
     height: 60px;
-    width: auto;
+    width: 60px; /* Forzamos que sea cuadrado para que el círculo sea perfecto */
+    border-radius: 50%;
+    object-fit: cover; /* Evita que la imagen se estire */
+    border: 2px solid var(--glass-border); /* Un borde sutil para que resalte */
     filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.3));
+    transition: all 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.1) rotate(5deg);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-glow);
 }
 
 nav ul {
