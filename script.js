@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             category: 'Ecosistema Digital',
             description: 'Plataforma robusta basada en microservicios y entretenimiento interactivo de alto rendimiento.',
             images: [
-                'img/proyecto 2mitriki.png'
+                'img/mitriki/proyecto 2mitriki.png'
                 // Aquí añadirás las imágenes de la nueva carpeta, ej: 'img/mitriki/foto1.png'
             ]
         },
