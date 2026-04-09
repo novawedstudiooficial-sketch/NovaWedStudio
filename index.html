@@ -202,7 +202,25 @@
             </div>
         </div>
     </footer>
-<footer>
+
+    <!-- Galería Modal (Lightbox) -->
+    <div id="project-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+            <div class="modal-gallery">
+                <button class="modal-prev"><i data-lucide="chevron-left"></i></button>
+                <div class="modal-image-container">
+                    <img id="modal-img" src="" alt="Imagen de proyecto">
+                </div>
+                <button class="modal-next"><i data-lucide="chevron-right"></i></button>
+            </div>
+            <div class="modal-info">
+                <h2 id="modal-title">Nombre del Proyecto</h2>
+                <p id="modal-desc">Descripción detallada del proyecto.</p>
+                <div class="modal-counter">Imagen <span id="current-index">1</span> de <span id="total-images">1</span></div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
     <script>
