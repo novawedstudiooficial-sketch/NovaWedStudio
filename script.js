@@ -22,8 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
             category: 'Ecosistema Digital',
             description: 'Plataforma robusta basada en microservicios y entretenimiento interactivo de alto rendimiento.',
             images: {
-                desktop: ['img/mitriki/proyecto 2mitriki.png'],
-                mobile: []
+                desktop: [
+                    'img/mitriki/proyecto 2mitriki.png',
+                    'img/mitriki/foto 1.png',
+                    'img/mitriki/foto 2.png'
+                ],
+                mobile: [
+                    'img/mitriki/foto 1 (formato celular).png',
+                    'img/mitriki/foto 2 (formato celular).png'
+                ]
             }
         },
         'Vortex App': {
