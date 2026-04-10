@@ -868,3 +868,46 @@ footer {
     background: rgba(255, 255, 255, 0.1);
     color: var(--text-primary);
 }
+
+/* Botón Flotante Instagram */
+.float-insta {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: var(--gradient);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+    z-index: 1500;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.float-insta:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 15px 35px var(--accent-glow);
+}
+
+.float-insta i {
+    width: 28px;
+    height: 28px;
+}
+
+@media (max-width: 768px) {
+    .float-insta {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+    .float-insta i {
+        width: 24px;
+        height: 24px;
+    }
+}
