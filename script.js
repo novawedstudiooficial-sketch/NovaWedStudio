@@ -53,6 +53,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Barra de progreso de lectura
+    window.onscroll = function() {
+        updateProgressBar();
+        handleHeaderScroll();
+    };
+
+    function updateProgressBar() {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById("myBar").style.width = scrolled + "%";
+    }
+
+    function handleHeaderScroll() {
+        const header = document.querySelector('header');
+        if (window.scrollY > 50) {
+            header.style.padding = '0.5rem 2rem';
+            header.style.background = 'rgba(11, 14, 20, 0.95)';
+        } else {
+            header.style.padding = '1.5rem 2rem';
+            header.style.background = 'rgba(11, 14, 20, 0.8)';
+        }
+    }
+
     // Elementos del Modal
     const modal = document.getElementById('project-modal');
     const modalImg = document.getElementById('modal-img');
@@ -74,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentProjectData = projectsData[projectName];
         if (!currentProjectData) return;
 
-        currentDevice = 'desktop'; // Reset a desktop al abrir
+        currentDevice = 'desktop';
         currentIndex = 0;
 
         updateDeviceSelectorVisibility();
@@ -88,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const selector = document.querySelector('.device-selector');
         selector.style.display = hasMobile ? 'flex' : 'none';
         
-        // Reset active state
         deviceBtns.forEach(btn => {
             btn.classList.toggle('active', btn.dataset.device === 'desktop');
         });
@@ -102,8 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
         modalCurrentIndex.textContent = currentIndex + 1;
         modalTotalImages.textContent = images.length;
 
-        // Estilo especial si es móvil (imagen más estrecha)
-        modalImg.style.maxHeight = currentDevice === 'mobile' ? '70vh' : '70vh';
         modalImg.style.width = currentDevice === 'mobile' ? 'auto' : '100%';
 
         prevBtn.style.display = images.length > 1 ? 'block' : 'none';
@@ -207,13 +228,6 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'all 0.8s ease-out';
         observer.observe(el);
-    });
-
-    // Header scroll logic
-    const header = document.querySelector('header');
-    window.addEventListener('scroll', () => {
-        header.style.padding = window.scrollY > 50 ? '0.5rem 2rem' : '1.5rem 2rem';
-        header.style.background = window.scrollY > 50 ? 'rgba(11, 14, 20, 0.95)' : 'rgba(11, 14, 20, 0.8)';
     });
 
     // Mobile menu logic
