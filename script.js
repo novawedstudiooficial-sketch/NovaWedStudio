@@ -32,24 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     'img/mitriki/foto 2 (formato celular).png'
                 ]
             }
-        },
-        'Vortex App': {
-            title: 'Vortex App',
-            category: 'Logística',
-            description: 'Optimización inteligente de rutas y gestión de flotas con IA aplicada.',
-            images: {
-                desktop: ['https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80'],
-                mobile: []
-            }
-        },
-        'Nova CRM': {
-            title: 'Nova CRM',
-            category: 'SaaS',
-            description: 'Gestión avanzada de relaciones con clientes diseñada para escalar negocios.',
-            images: {
-                desktop: ['https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80'],
-                mobile: []
-            }
         }
     };
 

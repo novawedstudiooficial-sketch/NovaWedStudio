@@ -331,6 +331,9 @@ pre { font-family: 'Fira Code', 'JetBrains Mono', monospace; font-size: 0.95rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2.5rem;
+    justify-content: center; /* Centra las tarjetas si hay pocas */
+    max-width: 900px; /* Limitamos el ancho para que 2 tarjetas no se estiren demasiado */
+    margin: 0 auto;
 }
 
 .project-card {
