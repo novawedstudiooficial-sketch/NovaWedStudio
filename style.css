@@ -33,6 +33,48 @@ html {
     pointer-events: none;
 }
 
+/* Cursor Personalizado */
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--accent-color);
+    transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s;
+}
+
+.cursor-dot, .cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.cursor-outline.hovered {
+    width: 65px;
+    height: 65px;
+    background-color: rgba(0, 255, 157, 0.1);
+    border-width: 1px;
+}
+
+@media (pointer: fine) {
+    body {
+        cursor: none;
+    }
+    a, button, .project-card, .service-card {
+        cursor: none;
+    }
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);

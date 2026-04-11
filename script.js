@@ -194,6 +194,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Cursor Personalizado
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+
+    window.addEventListener('mousemove', (e) => {
+        const posX = e.clientX;
+        const posY = e.clientY;
+
+        // Mostrar cursores al mover el ratón
+        cursorDot.style.opacity = '1';
+        cursorOutline.style.opacity = '1';
+
+        // Punto central (instantáneo)
+        cursorDot.style.left = `${posX}px`;
+        cursorDot.style.top = `${posY}px`;
+
+        // Contorno (con suave animación)
+        cursorOutline.animate({
+            left: `${posX}px`,
+            top: `${posY}px`
+        }, { duration: 500, fill: "forwards" });
+    });
+
+    // Efecto de expansión en elementos interactivos
+    const interactiveElements = document.querySelectorAll('a, button, .project-card, .service-card');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursorOutline.classList.add('hovered');
+        });
+        el.addEventListener('mouseleave', () => {
+            cursorOutline.classList.remove('hovered');
+        });
+    });
+
     // Sistema de Partículas
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
