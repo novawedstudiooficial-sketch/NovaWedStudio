@@ -161,6 +161,20 @@ nav ul li a:hover {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     position: relative;
+    border-right: 3px solid transparent; /* Para el cursor de escritura */
+}
+
+#typing-text.typing::after {
+    content: '|';
+    position: absolute;
+    right: -10px;
+    color: var(--accent-color);
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 .hero-content p {
